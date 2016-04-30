@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.hsofttecnologies.domicilios.dao.UsuarioDao;
 import com.hsofttecnologies.domicilios.entities.Usuario;
@@ -19,6 +20,7 @@ import com.hsofttecnologies.domicilios.services.UsuarioService;
  *
  */
 @Service("usuarioService")
+@Transactional
 public class UsuarioServiceImp implements UsuarioService {
 
 	@Autowired
