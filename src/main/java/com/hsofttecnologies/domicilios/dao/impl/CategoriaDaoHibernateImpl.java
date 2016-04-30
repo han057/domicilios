@@ -41,8 +41,7 @@ public class CategoriaDaoHibernateImpl extends AbstractDAO<Categoria> implements
 	}
 
 	public void agregarCategoria(Categoria categoria) {
-		logger.debug("Agregando nueva categoría con nombre :"
-				+ categoria.getNombre() + "...");
+		logger.debug("Agregando nueva categoría con nombre :"+ categoria.getNombre() + "...");
 		save(categoria);
 		logger.debug("Nueva categoría con nombre :" + categoria.getNombre()
 				+ " creada!");

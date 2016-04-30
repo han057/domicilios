@@ -3,4 +3,5 @@ insert
         categoria
         (id, nombre) 
     values
-        (default, 'Data inicial')
+        (default, 'Data inicial');
+        

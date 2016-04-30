@@ -45,7 +45,7 @@ public class CategoriaDaoHibernateImplTest extends
 		categoriaDao.agregarCategoria(categoria);
 	}
 
-	@Test
+	@Test 
 	public void testActualizarCategoria() {
 		String nuevoNombre = "Nuevo nombre";
 
