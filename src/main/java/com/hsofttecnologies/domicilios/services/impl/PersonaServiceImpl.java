@@ -10,6 +10,8 @@ import java.util.List;
 
 import com.hsofttecnologies.domicilios.dao.PersonaDao;
 import com.hsofttecnologies.domicilios.entities.Persona;
+import com.hsofttecnologies.domicilios.entities.Usuario;
+import com.hsofttecnologies.domicilios.exception.ObjectAlreadyExistException;
 import com.hsofttecnologies.domicilios.exception.ObjectNotFoundException;
 import com.hsofttecnologies.domicilios.services.PersonaService;
 
@@ -31,15 +33,33 @@ public class PersonaServiceImpl implements PersonaService {
 	}
 
 	public void agregarPersona(Persona persona) {
-		personaDao.agregarPersona(persona);
+		Persona tem=personaDao.buscarPorIdentificacion(persona.getIdentificacion());
+		if(tem==null){
+			personaDao.agregarPersona(persona);	
+		}else{
+			throw new ObjectAlreadyExistException("Persona con identifricacion: "+persona.getIdentificacion()+" ya existe");
+		}
+		
 		
 	}
 
 	public void actualizarPersona(Persona persona) {
-		personaDao.actualizarPersona(persona);
-		
+		Persona tem=personaDao.buscarPorId(persona.getId());
+		if(tem!=null){
+			personaDao.actualizarPersona(persona);
+		}else{
+			throw new ObjectAlreadyExistException("persona con id: "+persona.getId()+" no actualizado");
+		}
 	}
 	public List<Persona> listarPersonas() {
 		return personaDao.listarPersonas();
+	}
+
+	public Persona buscarPorIdentifricacion(String identificacion) {
+		Persona persona=personaDao.buscarPorIdentificacion(identificacion);
+		if(persona==null){
+			throw new ObjectNotFoundException("Persona con identifricacion : "+identificacion+" No encontrado");
+		}
+		return persona;
 	}
 }

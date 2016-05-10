@@ -8,9 +8,9 @@ import org.springframework.stereotype.Service;
 import com.hsofttecnologies.domicilios.dao.PedidoDao;
 import com.hsofttecnologies.domicilios.entities.Pedido;
 import com.hsofttecnologies.domicilios.exception.ObjectNotFoundException;
-import com.hsofttecnologies.domicilios.services.PedidoServicie;
-@Service("pedidoServicie")
-public class PedidoServiceImpl implements PedidoServicie {
+import com.hsofttecnologies.domicilios.services.PedidoService;
+@Service("pedidoService")
+public class PedidoServiceImpl implements PedidoService {
 
 	@Autowired
 	PedidoDao pedidoDao;

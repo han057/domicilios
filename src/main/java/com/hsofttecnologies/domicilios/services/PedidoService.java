@@ -5,7 +5,7 @@ import java.util.List;
 import com.hsofttecnologies.domicilios.entities.Pedido;
 
 
-public interface PedidoServicie {
+public interface PedidoService {
 
 	/**
 	 * Lista los pedidos

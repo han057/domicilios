@@ -30,6 +30,16 @@ public interface PersonaService {
 	public Persona buscarPorId(int id);
 
 	/**
+	 * Buscar una Persona por su identificacion único, si no lo encuentra lanza
+	 * un ObjectNotFoundException
+	 * 
+	 * @param identificacion- identificacion a buscar
+	 * @return la Persona con documento de identificacion si lo encuentra, de lo
+	 *         contrario lanza ObjectNotFoundException
+	 */
+	public Persona buscarPorIdentifricacion(String identificacion);
+	
+	/**
 	 * Agrega una nueva Persooan, si ya existe la persona con el mismo
 	 * nombre lanza un ObjectAlreadyExistEception
 	 * 

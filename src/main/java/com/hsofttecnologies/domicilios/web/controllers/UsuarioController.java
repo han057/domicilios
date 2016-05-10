@@ -39,12 +39,17 @@ public class UsuarioController {
 		return respuesta;
 	}
 
-	/*
-	 * @RequestMapping(method=RequestMethod.GET) public Usuario busarPorNombre()
-	 * { Usuario u= new Usuario(); u.setId(1); u.setNombre("Fredy"); return u; }
-	 * 
-	 * @RequestMapping(value = "/usuarios", method = RequestMethod.GET) public
-	 * List<Usuario> listaUsuarios() { List<Usuario> lista = new
-	 * ArrayList<Usuario>(); return lista; }
-	 */
+	
+	@RequestMapping(method = RequestMethod.PUT)
+	public Respuesta actualizargregarUsuario(@ModelAttribute("usuario") Usuario usuario) {
+		usuarioService.agregarUsuario(usuario);
+		Respuesta respuesta = new Respuesta();
+		respuesta.setTipo("Confirmacion");
+		respuesta.setMensaje("El usuario ha sido actualizado correctamente");
+		respuesta.setBody(usuario);
+		return respuesta;
+	}
+	
+	
+	
 }

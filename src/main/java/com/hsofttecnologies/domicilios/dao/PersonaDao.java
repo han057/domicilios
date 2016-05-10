@@ -31,6 +31,16 @@ public interface PersonaDao {
 	public Persona buscarPorNombre(String nombre);
 
 	/**
+	 * Buscar una persona por su documento de identificacion
+	 * 
+	 * @param documento - documento de identificacion a buscar
+	 * @return la persona cuyo documento de identificacion es igual al parametro dado, si no existe
+	 *         null
+	 */
+	public Persona buscarPorIdentificacion(String identificacion);
+
+	
+	/**
 	 * Agrega una nueva Persona
 	 * 
 	 * @param Persona

@@ -57,4 +57,5 @@ public interface CategoriaDao {
 	 *            - Categoría a actualizar
 	 */
 	public void actualizarCategoria(Categoria categoria);
+
 }

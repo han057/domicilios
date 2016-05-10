@@ -24,6 +24,17 @@ public interface CategoriaService {
 	 */
 	public Categoria buscarPorId(int id);
 
+	
+	/**
+	 * Buscar una categoria por su nombre único, si no lo encuentra lanza
+	 * un ObjectNotFoundException
+	 * 
+	 * @param nombre - nombrea buscar
+	 * @return la categoría con Nombre si lo encuentra, de lo
+	 *         contrario lanza ObjectNotFoundException
+	 */
+	public Categoria buscarPorNombre(String nombre);
+	
 	/**
 	 * Agrega una nueva categoría, si ya existe una categoría con el mismo
 	 * nombre lanza un ObjectAlreadyExistEception
@@ -41,4 +52,6 @@ public interface CategoriaService {
 	 */
 	public void actualizarCategoria(Categoria categoria);
 
+	
+	
 }

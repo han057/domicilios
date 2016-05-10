@@ -55,4 +55,9 @@ public class PersonaDaoHibernateImpl  extends AbstractDAO<Persona> implements Pe
 		
 	}
 
+	public Persona buscarPorIdentificacion(String identificacion) {
+		logger.debug("Buscar la persona por Documento de identificacion: "+identificacion);
+		return (Persona) getSession().createCriteria(Persona.class).add(Restrictions.eq("identificacion", identificacion)).uniqueResult();
+	}
+
 }

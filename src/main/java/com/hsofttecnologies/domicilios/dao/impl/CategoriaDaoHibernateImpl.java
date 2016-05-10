@@ -58,4 +58,6 @@ public class CategoriaDaoHibernateImpl extends AbstractDAO<Categoria> implements
 		return (Categoria) getSession().createCriteria(Categoria.class).add(Restrictions.eq("nombre", nombre)).uniqueResult();
 	}
 
+	
+
 }
