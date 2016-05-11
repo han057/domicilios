@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.hsofttecnologies.domicilios.dao.CategoriaDao;
 import com.hsofttecnologies.domicilios.entities.Categoria;
-import com.hsofttecnologies.domicilios.entities.Persona;
 import com.hsofttecnologies.domicilios.exception.ObjectAlreadyExistException;
 import com.hsofttecnologies.domicilios.exception.ObjectNotFoundException;
 import com.hsofttecnologies.domicilios.services.CategoriaService;

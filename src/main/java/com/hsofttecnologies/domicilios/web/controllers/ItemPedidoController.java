@@ -12,9 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hsofttecnologies.domicilios.entities.ItemPedido;
-import com.hsofttecnologies.domicilios.entities.Pedido;
 import com.hsofttecnologies.domicilios.services.ItemPedidoService;
-import com.hsofttecnologies.domicilios.services.PedidoService;
 import com.hsofttecnologies.domicilios.web.dto.Respuesta;
 
 /**

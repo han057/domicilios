@@ -2,7 +2,6 @@ package com.hsofttecnologies.domicilios.services;
 
 import java.util.List;
 
-import com.hsofttecnologies.domicilios.entities.Categoria;
 import com.hsofttecnologies.domicilios.entities.ItemPedido;
 
 public interface ItemPedidoService {

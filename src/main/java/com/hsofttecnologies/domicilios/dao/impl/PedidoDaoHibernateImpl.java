@@ -13,7 +13,6 @@ import org.springframework.stereotype.Repository;
 
 import com.hsofttecnologies.domicilios.dao.AbstractDAO;
 import com.hsofttecnologies.domicilios.dao.PedidoDao;
-import com.hsofttecnologies.domicilios.entities.Categoria;
 import com.hsofttecnologies.domicilios.entities.Pedido;
 
 /**

@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.hsofttecnologies.domicilios.entities.Categoria;
 import com.hsofttecnologies.domicilios.entities.Producto;
 import com.hsofttecnologies.domicilios.services.ProductoService;
 import com.hsofttecnologies.domicilios.web.dto.Respuesta;

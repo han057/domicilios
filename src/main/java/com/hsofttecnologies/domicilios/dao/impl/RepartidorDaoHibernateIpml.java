@@ -14,7 +14,6 @@ import org.springframework.stereotype.Repository;
 import com.hsofttecnologies.domicilios.dao.AbstractDAO;
 import com.hsofttecnologies.domicilios.dao.RepartidorDao;
 import com.hsofttecnologies.domicilios.entities.Repartidor;
-import com.hsofttecnologies.domicilios.entities.Usuario;
 
 /**
  * Implementacion usando hibernate de la interfaz de acceso a datos Repartidor

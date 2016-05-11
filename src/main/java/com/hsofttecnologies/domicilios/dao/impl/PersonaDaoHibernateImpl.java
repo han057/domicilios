@@ -4,9 +4,6 @@
 package com.hsofttecnologies.domicilios.dao.impl;
 
 import java.util.List;
-
-import javax.jms.Session;
-
 import org.apache.log4j.Logger;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
@@ -15,7 +12,6 @@ import org.springframework.stereotype.Repository;
 
 import com.hsofttecnologies.domicilios.dao.AbstractDAO;
 import com.hsofttecnologies.domicilios.dao.PersonaDao;
-import com.hsofttecnologies.domicilios.entities.Categoria;
 import com.hsofttecnologies.domicilios.entities.Persona;
 
 /**

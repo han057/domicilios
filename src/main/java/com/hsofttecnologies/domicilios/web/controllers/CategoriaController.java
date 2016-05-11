@@ -12,9 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hsofttecnologies.domicilios.entities.Categoria;
-import com.hsofttecnologies.domicilios.entities.Persona;
 import com.hsofttecnologies.domicilios.services.CategoriaService;
-import com.hsofttecnologies.domicilios.services.PersonaService;
 import com.hsofttecnologies.domicilios.web.dto.Respuesta;
 
 /**

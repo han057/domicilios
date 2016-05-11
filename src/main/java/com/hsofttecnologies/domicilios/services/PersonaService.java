@@ -3,7 +3,6 @@ package com.hsofttecnologies.domicilios.services;
 import java.util.List;
 
 import com.hsofttecnologies.domicilios.entities.Persona;
-import com.hsofttecnologies.domicilios.entities.Producto;
 
 /**
  * 

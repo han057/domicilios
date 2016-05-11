@@ -11,17 +11,15 @@ import org.springframework.stereotype.Repository;
 
 import com.hsofttecnologies.domicilios.dao.AbstractDAO;
 import com.hsofttecnologies.domicilios.dao.ItemPedidoDao;
-import com.hsofttecnologies.domicilios.entities.Categoria;
 import com.hsofttecnologies.domicilios.entities.ItemPedido;
-import com.sun.mail.imap.protocol.Item;
 
 /**
  * @author INTERNET_2
  *
  */
 @Repository("itemPedido")
-public class ItemPedidoHibernateDaoImp extends AbstractDAO<ItemPedido> implements ItemPedidoDao {
-	private Logger logger = Logger.getLogger(ItemPedidoHibernateDaoImp.class);
+public class ItemDaoPedidoHibernateImp extends AbstractDAO<ItemPedido> implements ItemPedidoDao {
+	private Logger logger = Logger.getLogger(ItemDaoPedidoHibernateImp.class);
 	/* (non-Javadoc)
 	 * @see com.hsofttecnologies.domicilios.dao.ItemPedidoDao#listarItemsPedido()
 	 */

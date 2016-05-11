@@ -10,7 +10,6 @@ import java.util.List;
 
 import com.hsofttecnologies.domicilios.dao.PersonaDao;
 import com.hsofttecnologies.domicilios.entities.Persona;
-import com.hsofttecnologies.domicilios.entities.Usuario;
 import com.hsofttecnologies.domicilios.exception.ObjectAlreadyExistException;
 import com.hsofttecnologies.domicilios.exception.ObjectNotFoundException;
 import com.hsofttecnologies.domicilios.services.PersonaService;
