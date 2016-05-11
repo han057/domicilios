@@ -35,6 +35,6 @@ public interface RepartidorService {
 	 * 
 	 * @param repartidor - Repartidor a actualizar
 	 */
-	public void actualizarCategoria(Repartidor repartidor);
+	public void actualizarRepartidor(Repartidor repartidor);
 
 }

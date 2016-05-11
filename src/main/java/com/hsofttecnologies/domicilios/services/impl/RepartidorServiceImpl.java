@@ -35,7 +35,8 @@ public class RepartidorServiceImpl implements RepartidorService {
 		}
 	}
 
-	public void actualizarCategoria(Repartidor repartidor) {
+
+	public void actualizarRepartidor(Repartidor repartidor) {
 		Repartidor repartidorTem =repartidorDao.buscarPorId(repartidor.getId());
 		if(repartidorTem!=null){
 			repartidorDao.actualizarRepartidor(repartidor);

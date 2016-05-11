@@ -54,7 +54,7 @@ public class PersonaServiceImpl implements PersonaService {
 		return personaDao.listarPersonas();
 	}
 
-	public Persona buscarPorIdentifricacion(String identificacion) {
+	public Persona buscarPorIdentificacion(String identificacion) {
 		Persona persona=personaDao.buscarPorIdentificacion(identificacion);
 		if(persona==null){
 			throw new ObjectNotFoundException("Persona con identifricacion : "+identificacion+" No encontrado");

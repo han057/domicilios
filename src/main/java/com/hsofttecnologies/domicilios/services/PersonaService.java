@@ -36,7 +36,7 @@ public interface PersonaService {
 	 * @return la Persona con documento de identificacion si lo encuentra, de lo
 	 *         contrario lanza ObjectNotFoundException
 	 */
-	public Persona buscarPorIdentifricacion(String identificacion);
+	public Persona buscarPorIdentificacion(String identificacion);
 	
 	/**
 	 * Agrega una nueva Persooan, si ya existe la persona con el mismo
