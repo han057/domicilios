@@ -6,7 +6,10 @@ package com.hsofttecnologies.domicilios.web.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,26 +22,27 @@ import com.hsofttecnologies.domicilios.web.dto.Respuesta;
  * @author Javier cabrera
  *
  */
-@RestController(value="/api/producto")
+@RestController
+@CrossOrigin
 public class ProductoController {
-	
+
+	private static final String url = "/api/producto";
 
 	@Autowired
 	ProductoService productoService;
 
-	@RequestMapping(method = RequestMethod.GET)
+	@RequestMapping(value = url, method = RequestMethod.GET)
 	public List<Producto> listarProductos() {
 		return productoService.listarProductos();
 	}
-	
-	
-	@RequestMapping(value="/{id}", method = RequestMethod.GET)
-	public Producto buscarProductoPorId(int id) {
+
+	@RequestMapping(value = url + "/{id}", method = RequestMethod.GET)
+	public Producto buscarProductoPorId(@PathVariable("id") int id) {
 		return productoService.buscarPorId(id);
 	}
-	
-	@RequestMapping(method = RequestMethod.POST)
-	public Respuesta agregarProducto(@ModelAttribute("producto") Producto producto) {
+
+	@RequestMapping(value = url, method = RequestMethod.POST)
+	public Respuesta agregarProducto(@RequestBody Producto producto) {
 		productoService.agregarProducto(producto);
 		Respuesta respuesta = new Respuesta();
 		respuesta.setTipo("Confirmacion");
@@ -46,15 +50,24 @@ public class ProductoController {
 		respuesta.setBody(producto);
 		return respuesta;
 	}
-	
-	@RequestMapping(method=RequestMethod.PUT)
-	public Respuesta actualizaProducto(@ModelAttribute("producto") Producto producto) {
+
+	@RequestMapping(value = url + "/{id}", method = RequestMethod.PUT)
+	public Respuesta actualizaProducto(@RequestBody Producto producto) {
 		productoService.actualizarProducto(producto);
 		Respuesta respuesta = new Respuesta();
 		respuesta.setTipo("Confirmacion");
-		respuesta.setMensaje("El producto ha sido Actualizado correctamente");
+		respuesta.setMensaje("El producto ha sido actualizado correctamente");
 		respuesta.setBody(producto);
 		return respuesta;
 	}
-	
+
+	@RequestMapping(value = url + "/{id}", method = RequestMethod.DELETE)
+	public Respuesta eliminarProducto(@PathVariable("id") int id) {
+		productoService.eliminarProducto(id);
+		Respuesta respuesta = new Respuesta();
+		respuesta.setTipo("Confirmacion");
+		respuesta.setMensaje("El producto ha sido eliminado correctamente");
+		return respuesta;
+	}
+
 }

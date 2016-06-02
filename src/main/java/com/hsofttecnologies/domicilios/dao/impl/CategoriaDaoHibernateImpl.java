@@ -22,8 +22,7 @@ import com.hsofttecnologies.domicilios.entities.Categoria;
  *
  */
 @Repository("categoriaDao")
-public class CategoriaDaoHibernateImpl extends AbstractDAO<Categoria> implements
-		CategoriaDao {
+public class CategoriaDaoHibernateImpl extends AbstractDAO<Categoria> implements CategoriaDao {
 
 	private Logger logger = Logger.getLogger(CategoriaDaoHibernateImpl.class);
 
@@ -41,10 +40,9 @@ public class CategoriaDaoHibernateImpl extends AbstractDAO<Categoria> implements
 	}
 
 	public void agregarCategoria(Categoria categoria) {
-		logger.debug("Agregando nueva categoría con nombre :"+ categoria.getNombre() + "...");
+		logger.debug("Agregando nueva categoría con nombre :" + categoria.getNombre() + "...");
 		save(categoria);
-		logger.debug("Nueva categoría con nombre :" + categoria.getNombre()
-				+ " creada!");
+		logger.debug("Nueva categoría con nombre :" + categoria.getNombre() + " creada!");
 	}
 
 	public void actualizarCategoria(Categoria categoria) {
@@ -55,9 +53,8 @@ public class CategoriaDaoHibernateImpl extends AbstractDAO<Categoria> implements
 
 	public Categoria buscarPorNombre(String nombre) {
 		logger.debug("Buscando categoria con nombre: " + nombre);
-		return (Categoria) getSession().createCriteria(Categoria.class).add(Restrictions.eq("nombre", nombre)).uniqueResult();
+		return (Categoria) getSession().createCriteria(Categoria.class).add(Restrictions.eq("nombre", nombre))
+				.uniqueResult();
 	}
-
-	
 
 }

@@ -48,10 +48,8 @@ public class CategoriaDaoHibernateImplTest extends
 	@Test 
 	public void testActualizarCategoria() {
 		String nuevoNombre = "Nuevo nombre";
-
 		Categoria categoria = categoriaDao.buscarPorId(7);
 		categoria.setNombre(nuevoNombre);
-
 		categoriaDao.actualizarCategoria(categoria);
 		Categoria c2 = categoriaDao.buscarPorId(7);
 		assertEquals(nuevoNombre, c2.getNombre());

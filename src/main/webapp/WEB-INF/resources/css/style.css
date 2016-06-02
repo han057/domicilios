@@ -1,0 +1,47 @@
+@CHARSET "UTF-8";
+
+title {
+	font-family: 'Kaushan Script', cursive;
+}
+
+.wrapper > h3 {
+	color: #898989;
+}
+
+.table {
+	color: #898989;
+}
+
+.main {
+	width: 100%;
+	min-height: 100vh;
+	position: relative;
+	overflow: hidden;
+}
+
+.main > img {
+	position: absolute;
+    top:26%;
+    left:35%;
+    z-index: 100;
+}
+
+.modal-header {
+	background: #b60515;
+}
+
+.control-label {
+	color: #000;
+}
+
+.form-group {
+	margin-top: 5%;
+}
+
+.messages p {
+	color: #e74c3c;
+}
+
+.modal-body p {
+	color: #000;
+}

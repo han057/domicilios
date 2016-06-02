@@ -37,5 +37,11 @@ public interface ProductoService {
 	 * @param Producto-Producto a actualizar
 	 */
 	public void actualizarProducto(Producto producto);
+	
+	/**
+	 * Cambia el estado del producto a inactivo
+	 * @param producto - Producto a eliminar
+	 */
+	public void eliminarProducto(int id);
 
 }

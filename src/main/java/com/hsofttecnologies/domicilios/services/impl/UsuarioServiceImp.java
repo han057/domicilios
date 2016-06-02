@@ -25,47 +25,62 @@ public class UsuarioServiceImp implements UsuarioService {
 
 	@Autowired
 	UsuarioDao usuarioDao;
-	/* (non-Javadoc)
-	 * @see com.hsofttecnologies.domicilios.services.UsuarioService#listarUsuarios()
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.hsofttecnologies.domicilios.services.UsuarioService#listarUsuarios()
 	 */
 	public List<Usuario> listarUsuarios() {
-		
+
 		return usuarioDao.listarUsuarios();
 	}
 
-	/* (non-Javadoc)
-	 * @see com.hsofttecnologies.domicilios.services.UsuarioService#buscarPorId(int)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.hsofttecnologies.domicilios.services.UsuarioService#buscarPorId(int)
 	 */
 	public Usuario buscarPorId(int id) {
-		Usuario usuario=usuarioDao.buscarPorId(id);
-		if(usuario==null){
-			throw new ObjectNotFoundException("Usuario con id: "+id+" no encotrado");
+		Usuario usuario = usuarioDao.buscarPorId(id);
+		if (usuario == null) {
+			throw new ObjectNotFoundException("Usuario con id: " + id + " no encotrado");
 		}
 		return usuario;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.hsofttecnologies.domicilios.services.UsuarioService#agregarUsuario(com.hsofttecnologies.domicilios.entities.Usuario)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.hsofttecnologies.domicilios.services.UsuarioService#agregarUsuario(
+	 * com.hsofttecnologies.domicilios.entities.Usuario)
 	 */
 	public void agregarUsuario(Usuario usuario) {
-		Usuario usuariotem=usuarioDao.buscarPorEmail(usuario.getEmail());
-		if(usuariotem==null){
+		Usuario usuariotem = usuarioDao.buscarPorEmail(usuario.getEmail());
+		if (usuariotem == null) {
 			usuarioDao.agregarUsuario(usuario);
-		}else{
-			throw new ObjectAlreadyExistException("Usuario con id: "+usuario.getEmail()+" no encotrado");
+		} else {
+			throw new ObjectAlreadyExistException("Usuario con id: " + usuario.getEmail() + " no encotrado");
 		}
 
 	}
 
-	/* (non-Javadoc)
-	 * @see com.hsofttecnologies.domicilios.services.UsuarioService#actualizarUsuario(com.hsofttecnologies.domicilios.entities.Usuario)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.hsofttecnologies.domicilios.services.UsuarioService#actualizarUsuario
+	 * (com.hsofttecnologies.domicilios.entities.Usuario)
 	 */
 	public void actualizarUsuario(Usuario usuario) {
-		Usuario usuariotem=usuarioDao.buscarPorId(usuario.getId());
-		if(usuariotem!=null){
+		Usuario usuariotem = usuarioDao.buscarPorId(usuario.getId());
+		if (usuariotem != null) {
 			usuarioDao.actualizarUsuario(usuario);
-		}else{
-			throw new ObjectAlreadyExistException("Usuario con id: "+usuario.getEmail()+" no actualizado");
+		} else {
+			throw new ObjectAlreadyExistException("Usuario con id: " + usuario.getEmail() + " no actualizado");
 		}
 
 	}

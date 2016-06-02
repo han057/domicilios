@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import com.hsofttecnologies.domicilios.dao.PersonaDao;
 import com.hsofttecnologies.domicilios.entities.Persona;
 import com.hsofttecnologies.domicilios.exception.ObjectAlreadyExistException;
@@ -19,6 +21,7 @@ import com.hsofttecnologies.domicilios.services.PersonaService;
  *
  */
 @Service("personaService")
+@Transactional
 public class PersonaServiceImpl implements PersonaService {
 	@Autowired 
 	PersonaDao personaDao;

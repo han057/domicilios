@@ -60,6 +60,9 @@ public class Producto {
 	@Column(name = "adicion")
 	private boolean adicion;
 
+	@Column(name = "activo")
+	private boolean activo;
+
 	/**
 	 * Retorna el identificador del producto
 	 * 
@@ -172,6 +175,25 @@ public class Producto {
 	 */
 	public void setAdicion(boolean adicion) {
 		this.adicion = adicion;
+	}
+
+	/**
+	 * Indica si el producto está activo
+	 * 
+	 * @return activo
+	 */
+	public boolean isActivo() {
+		return activo;
+	}
+
+	/**
+	 * Establece si el producto está activo o no
+	 * 
+	 * @param activo
+	 *            True en caso de que esté activo, en caso contrario False
+	 */
+	public void setActivo(boolean activo) {
+		this.activo = activo;
 	}
 
 }
