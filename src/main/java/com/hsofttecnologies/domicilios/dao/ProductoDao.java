@@ -11,6 +11,14 @@ public interface ProductoDao {
 	 * @return Lista de categorias
 	 */
 	public List<Producto> listarProductos();
+	
+	/**
+	 * Lista Productos por categoria
+	 * 
+	 * @return Lista de Productos
+	 */
+	public List<Producto> listarProductosPorCategoria(int categoria);
+
 
 	/**
 	 * Buscar un Producto por su identificador único

@@ -31,6 +31,12 @@ public class ProductoController {
 	@Autowired
 	ProductoService productoService;
 
+	
+	@RequestMapping(value = url + "/categoria/{id}", method = RequestMethod.GET)
+	public List<Producto> listarProductosPorCategoria(@PathVariable("id") int id) {
+		return productoService.listarProductosPorCategoria(id);
+	}
+	
 	@RequestMapping(value = url, method = RequestMethod.GET)
 	public List<Producto> listarProductos() {
 		return productoService.listarProductos();

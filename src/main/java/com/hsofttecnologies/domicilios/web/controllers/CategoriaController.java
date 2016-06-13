@@ -29,7 +29,7 @@ public class CategoriaController {
 	private static final String url = "/api/categoria";
 
 	@Autowired
-	CategoriaService categoriaService;
+	private CategoriaService categoriaService;
 
 	@RequestMapping(value = url, method = RequestMethod.GET)
 	public List<Categoria> listarCategoria() {

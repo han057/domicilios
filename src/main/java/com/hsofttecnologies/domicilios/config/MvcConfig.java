@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.core.env.Environment;
@@ -16,25 +17,22 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import com.hsofttecnologies.domicilios.util.FileUtil;
 
-
 @EnableWebMvc
 @Configuration
 @ComponentScan(basePackages = { "com.hsofttecnologies.domicilios" })
-@PropertySource(value = {"classpath:application.properties"})
+@PropertySource(value = { "classpath:application.properties" })
 public class MvcConfig extends WebMvcConfigurerAdapter {
 
 	@Autowired
 	Environment environment;
-	
+
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("/resources/**").addResourceLocations(
-				"/WEB-INF/resources/");
+		registry.addResourceHandler("/resources/**").addResourceLocations("/WEB-INF/resources/");
 	}
 
 	@Override
-	public void configureDefaultServletHandling(
-			DefaultServletHandlerConfigurer configurer) {
+	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
 		configurer.enable();
 	}
 
@@ -58,7 +56,7 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 		resource.setDefaultEncoding("UTF-8");
 		return resource;
 	}
-	
+
 	@Bean(name = "fileUtil")
 	public FileUtil getFileUtil() {
 		return new FileUtil(environment.getProperty("imagePath"));

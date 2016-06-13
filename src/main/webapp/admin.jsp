@@ -1,7 +1,8 @@
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="Dashboard">
@@ -88,22 +89,30 @@
                       </a>
                   </li>
 
-                  <li class="sub-menu">
-                      <a href="#/productos" >
-                          <i class="fa fa-cutlery"></i>
-                          <span>Productos</span>
-                      </a>
-                  </li>
-                  <li class="sub-menu">
+				  <sec:authorize access="hasRole('ROLE_ADMIN') and isAuthenticated()">
+					  <li class="sub-menu">
+	                      <a href="#/productos" >
+	                          <i class="fa fa-cutlery"></i>
+	                          <span>Productos</span>
+	                      </a>
+	                  </li>
+				  </sec:authorize>
+                  <!-- <li class="sub-menu">
                       <a href="javascript:;" >
                           <i class="fa fa-list-ol"></i>
                           <span>Categorias</span>
                       </a>
-                  </li>
-                  <li class="sub-menu">
+                  </li> -->
+                  <!--<li class="sub-menu">
                       <a href="javascript:;" >
                           <i class="fa fa-motorcycle"></i>
                           <span>Repartidores</span>
+                      </a>
+                  </li>-->
+                  <li class="sub-menu">
+                      <a href="javascript:;" >
+                          <i class="fa fa-bar-chart" aria-hidden="true"></i>
+                          <span>Reportes</span>
                       </a>
                   </li>
               </ul>
@@ -176,13 +185,19 @@
   	<script type="text/javascript" src="resources/js/lib/router.es5.min.js"></script>
   	<script type="text/javascript" src="resources/js/lib/angular-resource.min.js"></script>
   	<script type="text/javascript" src="resources/js/lib/ng-image-input-with-preview.min.js"></script>
+  	<script src="resources/js/lib/sockjs-1.1.1.min.js"></script>
+	<script src="resources/js/lib/stomp.min.js"></script>
   	<script type="text/javascript" src="resources/js/domicilios/domicilios.js"></script>
   	<script type="text/javascript" src="resources/js/domicilios/CategoriaService.js"></script>
-  	<script type="text/javascript" src="resources/js/domicilios/ProductoService.js"></script>
   	<script type="text/javascript" src="resources/js/domicilios/FileUpload.js"></script>
   	<script type="text/javascript" src="resources/js/domicilios/FileModel.js"></script>
+  	<script type="text/javascript" src="resources/js/domicilios/PedidoService.js"></script>
+  	<script type="text/javascript" src="resources/js/domicilios/ProductoService.js"></script>
+  	<script type="text/javascript" src="resources/js/domicilios/RepartidorService.js"></script>
   	<script type="text/javascript" src="resources/js/domicilios.admin/domicilios.admin.js"></script>
+  	<script type="text/javascript" src="resources/js/domicilios.admin/PedidosScoketService.js"></script>
   	<script type="text/javascript" src="components/indexadmin/indexadmin.js"></script>
+  	<script type="text/javascript" src="components/pedidos/pedidos.js"></script>
     <script type="text/javascript" src="components/productos/productos.js"></script>
   </body>
 </html>

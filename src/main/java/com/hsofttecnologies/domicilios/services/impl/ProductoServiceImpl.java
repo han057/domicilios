@@ -53,4 +53,9 @@ public class ProductoServiceImpl implements ProductoService {
 		producto.setActivo(false);
 		productoDao.actualizarProducto(producto);
 	}
+
+	@Override
+	public List<Producto> listarProductosPorCategoria(int categoria) {
+		return productoDao.listarProductosPorCategoria(categoria);
+	}
 }

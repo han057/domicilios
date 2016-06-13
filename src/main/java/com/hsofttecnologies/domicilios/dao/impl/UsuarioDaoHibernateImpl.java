@@ -18,9 +18,9 @@ import com.hsofttecnologies.domicilios.entities.Usuario;
  * @version 1.0
  *
  */
-@Repository("UsuarioDao")
-public class UsuarioDaoHibernateImp extends AbstractDAO<Usuario> implements UsuarioDao {
-	private Logger logger = Logger.getLogger(UsuarioDaoHibernateImp.class);
+@Repository("usuarioDao")
+public class UsuarioDaoHibernateImpl extends AbstractDAO<Usuario> implements UsuarioDao {
+	private Logger logger = Logger.getLogger(UsuarioDaoHibernateImpl.class);
 	/* (non-Javadoc)
 	 * @see com.hsofttecnologies.domicilios.dao.UsuarioDao#listarUsuarios()
 	 */
@@ -44,7 +44,7 @@ public class UsuarioDaoHibernateImp extends AbstractDAO<Usuario> implements Usua
 	 */
 	public Usuario buscarPorNombre(String nombre) {
 		logger.debug("Busca un usuario por el nombre: "+nombre);
-		return (Usuario)getSession().createCriteria(Usuario.class).add(Restrictions.eq("nombre", nombre)).uniqueResult();
+		return (Usuario)getSession().createCriteria(Usuario.class).add(Restrictions.eq("usuario", nombre)).uniqueResult();
 	}
 
 	/* (non-Javadoc)

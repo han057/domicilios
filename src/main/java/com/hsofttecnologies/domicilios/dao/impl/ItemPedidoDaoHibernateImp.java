@@ -18,8 +18,8 @@ import com.hsofttecnologies.domicilios.entities.ItemPedido;
  *
  */
 @Repository("itemPedido")
-public class ItemDaoPedidoHibernateImp extends AbstractDAO<ItemPedido> implements ItemPedidoDao {
-	private Logger logger = Logger.getLogger(ItemDaoPedidoHibernateImp.class);
+public class ItemPedidoDaoHibernateImp extends AbstractDAO<ItemPedido> implements ItemPedidoDao {
+	private Logger logger = Logger.getLogger(ItemPedidoDaoHibernateImp.class);
 	/* (non-Javadoc)
 	 * @see com.hsofttecnologies.domicilios.dao.ItemPedidoDao#listarItemsPedido()
 	 */

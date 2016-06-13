@@ -1,2 +1,7 @@
 INSERT INTO categoria (id, nombre) VALUES (default, 'Hamburgesas'), (default, 'Perros'), (default, 'Fit');
 INSERT INTO producto (id,activo, adicion, descripcion, nombre, valor, categoria) VALUES (default, true, false, 'Descripción producto', 'Hamburguesa de pollo', 10000, 1), (default, true, false, 'Descripción producto', 'Hamburguesa de carne', 10000, 1), (default, true, false, 'Descripción producto', 'Hamburguesa de MrK especial', 10000, 1), (default, true, false, 'Descripción producto', 'Hamburguesa de perro', 10000, 2), (default, true, false, 'Descripción producto', 'Hamburguesa de perro Mrk', 10000, 2), (default, true, false, 'Descripción producto', 'Hamburguesa de Perro MrK especial', 10000, 2);
+INSERT INTO pedido(id, clientedireccion, clientenombre, clientetelefono, estado, fecha, repartidor) VALUES (default, 'Calle 15 # 22 - 32', 'Fredy hernan Sanchez montaña', '3102821445', 1, now(), null), (default, 'Calle 15 # 22 - 32', 'Fredy hernan Sanchez montaña', '3102821445', 1, now(), null), (default, 'Calle 15 # 22 - 32', 'Fredy hernan Sanchez montaña', '3102821445', 1, now(), null), (default, 'Calle 15 # 22 - 32', 'Fredy hernan Sanchez montaña', '3102821445', 2, now(), null);
+INSERT INTO itempedido(default, 3, 3000, 1, 1);
+INSERT INTO persona(id, apellido, identificacion, nombre, telefono) VALUES (default, 'Sanchez', '1075247337', 'Fredy', '3102812463');
+INSERT INTO repartidor(fechaingreso, id) VALUES (now(), 1);
+

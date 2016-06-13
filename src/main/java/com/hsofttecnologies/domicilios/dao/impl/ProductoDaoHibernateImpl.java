@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
@@ -50,6 +51,14 @@ public class ProductoDaoHibernateImpl extends AbstractDAO<Producto> implements P
 		getSession().update(producto);
 		logger.debug("Actualizando producto con id: " + producto.getId());
 
+	}
+
+	@Override
+	public List<Producto> listarProductosPorCategoria(int categoria) {
+		logger.debug("Listar productos por categoria: " + categoria);
+		Query query = getSession().createQuery("FROM Producto p WHERE p.categoria.id=:id AND p.activo=true ORDER BY p.id ASC");
+		query.setInteger("id", categoria);
+		return query.list();
 	}
 
 }

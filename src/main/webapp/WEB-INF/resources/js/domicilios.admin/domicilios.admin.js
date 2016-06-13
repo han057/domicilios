@@ -11,6 +11,12 @@
 		}, {
 			path : '/productos',
 			components : 'productos'
+		}, {
+			path : '/pedidos',
+			components : 'pedidos'
+		}, {
+			path : '/reportes',
+			components : 'reportes'
 		}]);
 	}
 

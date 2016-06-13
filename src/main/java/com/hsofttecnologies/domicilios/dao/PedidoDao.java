@@ -14,6 +14,14 @@ public interface PedidoDao {
 	 * @return Lista de Pedidos
 	 */
 	public List<Pedido> listarPedidos();
+	
+	/**
+	 * Lista los pedidos desde el repositorio de datos 
+	 * con estado 1 (Entrante)
+	 * 
+	 * @return Lista de Pedidos
+	 */
+	public List<Pedido> listarPedidosEstado(int id);
 
 	/**
 	 * Buscar un pedido por su identificador único

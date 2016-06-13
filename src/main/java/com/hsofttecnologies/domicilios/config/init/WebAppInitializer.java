@@ -4,17 +4,18 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
 
 import com.hsofttecnologies.domicilios.config.HibernateConfig;
 import com.hsofttecnologies.domicilios.config.MvcConfig;
+import com.hsofttecnologies.domicilios.config.SecurityConfig;
 
 public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
-		return new Class[] { HibernateConfig.class,  };
+		return new Class[] { HibernateConfig.class, SecurityConfig.class, MvcConfig.class };
 	}
 
 	@Override
 	protected Class<?>[] getServletConfigClasses() {
-		return new Class[] { MvcConfig.class };
+		return null;
 	}
 
 	@Override

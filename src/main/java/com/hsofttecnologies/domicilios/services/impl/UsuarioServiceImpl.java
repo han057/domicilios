@@ -21,7 +21,7 @@ import com.hsofttecnologies.domicilios.services.UsuarioService;
  */
 @Service("usuarioService")
 @Transactional
-public class UsuarioServiceImp implements UsuarioService {
+public class UsuarioServiceImpl implements UsuarioService {
 
 	@Autowired
 	UsuarioDao usuarioDao;

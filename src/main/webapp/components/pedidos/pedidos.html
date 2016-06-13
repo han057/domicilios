@@ -1,0 +1,258 @@
+<h3>
+	<i class="fa fa-angle-right"></i>Pedidos
+</h3>
+<div class="row mt" style="margin-top: 2px">
+	<div class="col-lg-10">
+		<div class="red-panel form-panel">
+			<div class="red-header">Pedidos entrantes</div>
+			<div style="padding: 5px;">
+				<table class="table table-striped table-advance table-hover"
+					style="margin-bottom: 0px">
+					<thead>
+						<tr>
+							<th class="">#</th>
+							<th class="">Cliente</th>
+							<th class="">Dirección</th>
+							<th class="">Teléfono</th>
+							<th class="">---</th>
+						</tr>
+					</thead>
+				</table>
+				<div
+					style="height: auto; max-height: 200px; overflow-y: auto; margin-top: 2px">
+					<table class="table table-striped table-advance table-hover">
+						<tbody>
+							<tr data-ng-repeat="pedido in pedidos.pedidosCollection">
+								<td class="">{{pedido.id}}</td>
+								<td class="">{{pedido.clienteNombre}}</td>
+								<td class="">{{pedido.clienteDireccion}}</td>
+								<td class="">{{pedido.clienteTelefono}}</td>
+								<td class=""><button class="btn btn-primary"
+										data-toggle="modal" data-target="#pedidoModal"
+										data-ng-click="pedidos.pedidoSelected = pedido; pedidos.total = 0">
+										<i class="fa fa-check-square-o" aria-hidden="true"></i>
+									</button></td>
+							</tr>
+						</tbody>
+					</table>
+
+					<noscript>
+						<h2 style="color: #ff0000">Seems your browser doesn't support
+							Javascript! Websocket relies on Javascript being enabled. Please
+							enable Javascript and reload this page!</h2>
+					</noscript>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-lg-10 ">
+		<div class="col-lg-6">
+			<div class="red-panel form-panel">
+				<div class="red-header">Pedidos confirmados</div>
+				<div style="padding: 5px;">
+					<table class="table table-striped table-advance table-hover"
+						style="margin-bottom: 0px">
+						<thead>
+							<tr>
+								<th class="">#</th>
+								<th class="">Dirección</th>
+								<th class="">Teléfono</th>
+								<th class="">---</th>
+							</tr>
+						</thead>
+					</table>
+					<div
+						style="height: auto; max-height: 200px; overflow-y: auto; margin-top: 2px">
+						<table class="table table-striped table-advance table-hover">
+							<tbody>
+								<tr
+									data-ng-repeat="pedido in pedidos.pedidosConfirmadosCollection">
+									<td class="">{{pedido.id}}</td>
+									<td class="">{{pedido.clienteDireccion}}</td>
+									<td class="">{{pedido.clienteTelefono}}</td>
+									<td class=""><button class="btn btn-primary"
+											data-toggle="modal" data-target="#enviarPedidoModal"
+											data-ng-click="pedidos.pedidoSelected = pedido">
+											<i class="fa fa-paper-plane" aria-hidden="true"></i>
+										</button></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-lg-6 ">
+			<div class="red-panel form-panel">
+				<div class="red-header">Pedidos enviados</div>
+				<div style="padding: 5px;">
+					<table class="table table-striped table-advance table-hover"
+						style="margin-bottom: 0px">
+						<thead>
+							<tr>
+								<th class="">#</th>
+								<th class="">Cliente</th>
+								<th class="">Dirección</th>
+								<th class="">Teléfono</th>
+								<th class="">---</th>
+							</tr>
+						</thead>
+					</table>
+					<div
+						style="height: auto; max-height: 200px; overflow-y: auto; margin-top: 0px">
+						<table class="table table-striped table-advance table-hover">
+							<tbody>
+								<tr data-ng-repeat="pedido in pedidos.pedidosEnviadosCollection">
+									<td class="">{{pedido.id}}</td>
+									<td class="">{{pedido.clienteNombre}}</td>
+									<td class="">{{pedido.clienteDireccion}}</td>
+									<td class="">{{pedido.clienteTelefono}}</td>
+									<td class="">
+										<button 
+											class="btn btn-primary"
+											data-toggle="modal" 
+											data-target="#pedidoEntregadoModal"
+											data-ng-click="pedidos.pedidoSelected = pedido">
+												<i class="fa fa-check" aria-hidden="true"></i>
+										</button>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>
+<div id="pedidoModal" class="modal fade" tabindex="-1" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title">Confirmar pedido</h4>
+			</div>
+			<form name="frmPedido"
+				data-ng-submit="frmPedido.$valid && productos.enviar()" novalidate>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-lg-12">
+							<dl class="dl-horizontal" style="color: #000">
+								<br>
+								<dt>Cliente</dt>
+								<dd>{{pedidos.pedidoSelected.clienteNombre}}</dd>
+								<dt>Dirección</dt>
+								<dd>{{pedidos.pedidoSelected.clienteDireccion}}</dd>
+								<dt>Telefono</dt>
+								<dd>{{pedidos.pedidoSelected.clienteTelefono}}</dd>
+								<br>
+								<dt>Repartidor</dt>
+								<dd>
+									<select class="form-control"
+										ng-model="pedidos.pedidoSelected.repartidor"
+										ng-options="rep as rep.nombre + ' ' + rep.apellido for rep in pedidos.repartidoresCollection"></select>
+								</dd>
+							</dl>
+						</div>
+						<div class="col-lg-12" style="margin-top: -10px">
+							<h5 style="color: #000">Productos</h5>
+							<table class="table">
+								<tr>
+									<th>#</th>
+									<th>Nombre</th>
+									<th>Cantidad</th>
+									<th>Valor</th>
+								</tr>
+								<tr data-ng-repeat="producto in pedidos.pedidoSelected.detalle"
+									data-ng-init="pedidos.total = productos.total + producto.valor">
+									<td>*</td>
+									<td>{{producto.producto.nombre}}</td>
+									<td>{{producto.cantidad | number}}</td>
+									<td>{{producto.valor | number}}</td>
+								</tr>
+								<tr>
+									<td colspan="3"></td>
+									<td>Total: {{pedidos.getTotal() | number}}</td>
+								</tr>
+							</table>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">Cancelar</button>
+							<input type="button" class="btn btn-primary" value="Agregar"
+								data-ng-disabled="pedidos.pedidoSelected.repartidor == null || pedidos.pedidoSelected.repartidor == undefined"
+								data-ng-click="pedidos.confirmar()" disabled="disabled">
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<div id="enviarPedidoModal" class="modal fade" tabindex="-1"
+	role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title">Enviar pedido</h4>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-lg-12">
+						<p>Seguro que desea enviar el pedido?</p>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+				<input type="button" class="btn btn-primary" value="Si"
+					data-ng-click="pedidos.enviar()">
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="pedidoEntregadoModal" class="modal fade" tabindex="-1"
+	role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title">Pedido entregado</h4>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-lg-12">
+						<p>El pedido fue entregado?</p>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+				<input type="button" class="btn btn-primary" value="No"
+					data-ng-click="pedidos.entregado(5)">
+				<input type="button" class="btn btn-primary" value="Si"
+					data-ng-click="pedidos.entregado(4)">
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<audio id="audio">
+  <source src="resources/assets/ring.ogg" type="audio/ogg">
+Your browser does not support the audio element.
+</audio>

@@ -3,10 +3,17 @@
  */
 package com.hsofttecnologies.domicilios.entities;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
@@ -44,6 +51,11 @@ public class Usuario extends Persona {
 
 	@Column(name = "email")
 	private String email;
+
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "app_user_user_rol", joinColumns = { @JoinColumn(name = "id") }, inverseJoinColumns = {
+			@JoinColumn(name = "rol_id") })
+	private Set<Rol> roles = new HashSet<Rol>(0);
 
 	/**
 	 * Retorna el nombre de usuario
@@ -101,4 +113,11 @@ public class Usuario extends Persona {
 		this.email = email;
 	}
 
+	public Set<Rol> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<Rol> roles) {
+		this.roles = roles;
+	}
 }

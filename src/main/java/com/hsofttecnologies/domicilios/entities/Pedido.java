@@ -3,7 +3,6 @@ package com.hsofttecnologies.domicilios.entities;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -14,6 +13,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 @Entity
 @Table(name = "pedido")
@@ -37,11 +39,12 @@ public class Pedido {
 	@JoinColumn(name = "repartidor")
 	private Repartidor repartidor;
 
-	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY)
+	@OneToMany(fetch = FetchType.EAGER, mappedBy="pedido")
+	@Cascade({CascadeType.SAVE_UPDATE})
 	private List<ItemPedido> detalle;
 
 	@Column(name = "estado")
-	private EnumEstados estado;
+	private int estado;
 
 	@Column(name = "fecha")
 	private Date fecha;
@@ -139,7 +142,7 @@ public class Pedido {
 	/**
 	 * @return the estado
 	 */
-	public EnumEstados getEstado() {
+	public int getEstado() {
 		return estado;
 	}
 
@@ -147,7 +150,7 @@ public class Pedido {
 	 * @param estado
 	 *            the estado to set
 	 */
-	public void setEstado(EnumEstados estado) {
+	public void setEstado(int estado) {
 		this.estado = estado;
 	}
 
