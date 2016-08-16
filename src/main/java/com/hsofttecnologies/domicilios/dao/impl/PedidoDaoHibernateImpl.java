@@ -95,4 +95,11 @@ public class PedidoDaoHibernateImpl extends AbstractDAO<Pedido> implements Pedid
 		return query.list();
 	}
 
+	@Override
+	public void eliminarItemPedido(int id) {
+		Query query = getSession().createQuery("DELETE ItemPedido WHERE id=:id");
+		query.setInteger("id", id);
+		query.executeUpdate();
+	}
+
 }

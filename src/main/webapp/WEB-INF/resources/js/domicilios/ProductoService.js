@@ -8,6 +8,15 @@
 			{id: '@id'}, {
 				update: {
  					method: 'PUT'
+    			},
+    			cambiarEstado: {
+    				method: 'POST',
+    				url: 'api/producto/estado/:id'
+    			},
+    			listarProductosPorNombre:{
+    				method: 'POST',
+    				url: 'api/producto/nombre',
+    				isArray:true
     			}
 			});
 		return resource;

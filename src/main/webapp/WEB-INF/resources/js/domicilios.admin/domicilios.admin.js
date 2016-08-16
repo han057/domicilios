@@ -1,7 +1,7 @@
 (function() {
 	'use strict'
 
-	angular.module('domicilios.admin', [ 'domicilios', 'ngNewRouter', 'ngMessages', 'ngImageInputWithPreview'])
+	angular.module('domicilios.admin', [ 'domicilios', 'ngNewRouter', 'ngMessages', 'ngImageInputWithPreview', 'ui.bootstrap'])
 	.controller('AppController', ['$router', AppController]);
 
 	function AppController($router) {

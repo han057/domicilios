@@ -8,18 +8,23 @@
 		var vm = this;
 
 		vm.categoriasCollection = [];
+		vm.productosCollectionPart = [];
+		vm.imagen = null;
+		vm.maxSize = 8;
+		vm.currentPage = 1;
 		vm.modalAction = '';
 		vm.productosCollection = [];
 		vm.productoSelected = null;
-		vm.imagen = null;
 
 		vm.abrirModal = abrirModal;
+		vm.changePage = changePage;
 		vm.eliminarProducto = eliminarProducto;
 		vm.enviar = enviar;
 		vm.selectProducto = selectProducto;
 
 		vm.productosCollection = ProductoService.query(function(){
 			vm.categoriasCollection = CategoriaService.query();
+			vm.productosCollectionPart = vm.productosCollection.slice(0, vm.maxSize); 
 		});
 		/*vm.promise = ProductoService.query(function(productos){
 			vm.productosCollection = productos;
@@ -39,9 +44,16 @@
 			vm.modalAction = accion;
 		}
 		
+		function changePage() {
+			console.log("Current page: " + vm.currentPage);
+			var start = vm.currentPage * vm.maxSize - vm.maxSize;
+			console.log("Current page * size - size: " + start);
+			vm.productosCollectionPart = vm.productosCollection.slice(start, (start + vm.maxSize));
+		}
+		
 		function eliminarProducto() {
-			ProductoService.delete(vm.productoSelected, function(data){
-				vm.productoSelected.activo = false;
+			ProductoService.cambiarEstado({id:vm.productoSelected.id}, vm.productoSelected, function(data){
+				vm.productoSelected.activo = !vm.productoSelected.activo;
 			});			
 		}
 		

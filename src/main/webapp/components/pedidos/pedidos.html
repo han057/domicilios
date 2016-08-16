@@ -29,7 +29,7 @@
 								<td class="">{{pedido.clienteTelefono}}</td>
 								<td class=""><button class="btn btn-primary"
 										data-toggle="modal" data-target="#pedidoModal"
-										data-ng-click="pedidos.pedidoSelected = pedido; pedidos.total = 0">
+										data-ng-click="pedidos.selectPedido(pedido, 'Confirmar')">
 										<i class="fa fa-check-square-o" aria-hidden="true"></i>
 									</button></td>
 							</tr>
@@ -71,8 +71,8 @@
 									<td class="">{{pedido.clienteDireccion}}</td>
 									<td class="">{{pedido.clienteTelefono}}</td>
 									<td class=""><button class="btn btn-primary"
-											data-toggle="modal" data-target="#enviarPedidoModal"
-											data-ng-click="pedidos.pedidoSelected = pedido">
+											data-toggle="modal" data-target="#pedidoModal"
+											data-ng-click="pedidos.selectPedido(pedido, 'Enviar')">
 											<i class="fa fa-paper-plane" aria-hidden="true"></i>
 										</button></td>
 								</tr>
@@ -109,12 +109,10 @@
 									<td class="">{{pedido.clienteDireccion}}</td>
 									<td class="">{{pedido.clienteTelefono}}</td>
 									<td class="">
-										<button 
-											class="btn btn-primary"
-											data-toggle="modal" 
+										<button class="btn btn-primary" data-toggle="modal"
 											data-target="#pedidoEntregadoModal"
 											data-ng-click="pedidos.pedidoSelected = pedido">
-												<i class="fa fa-check" aria-hidden="true"></i>
+											<i class="fa fa-check" aria-hidden="true"></i>
 										</button>
 									</td>
 								</tr>
@@ -128,14 +126,14 @@
 	</div>
 </div>
 <div id="pedidoModal" class="modal fade" tabindex="-1" role="dialog">
-	<div class="modal-dialog">
+	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal"
 					aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
-				<h4 class="modal-title">Confirmar pedido</h4>
+				<h4 class="modal-title">{{pedidos.accion}} pedido</h4>
 			</div>
 			<form name="frmPedido"
 				data-ng-submit="frmPedido.$valid && productos.enviar()" novalidate>
@@ -152,14 +150,59 @@
 								<dd>{{pedidos.pedidoSelected.clienteTelefono}}</dd>
 								<br>
 								<dt>Repartidor</dt>
-								<dd>
+								<dd data-ng-show="pedidos.accion == 'Confirmar'">
 									<select class="form-control"
-										ng-model="pedidos.pedidoSelected.repartidor"
-										ng-options="rep as rep.nombre + ' ' + rep.apellido for rep in pedidos.repartidoresCollection"></select>
+										data-ng-model="pedidos.pedidoSelected.repartidor"
+										data-ng-options="rep as rep.nombre + ' ' + rep.apellido for rep in pedidos.repartidoresCollection"></select>
 								</dd>
+								<dd data-ng-hide="pedidos.accion == 'Confirmar'">
+									{{pedidos.pedidoSelected.repartidor.nombre}}</dd>
 							</dl>
+							<div class="form-group col-lg-12" style="margin-top: 1%" data-ng-show="pedidos.accion=='Confirmar'">
+								<label class="label" style="color: #000">Agregar
+									producto</label> <input type="text" name="nombreProducto"
+									class="form-control" data-ng-model="pedidos.nombreProducto"><br>
+								<button class="btn btn-primary pull-right"
+									data-ng-click="pedidos.buscarProducto()">
+									<i class="fa fa-search"></i> Buscar
+								</button>
+							</div>
 						</div>
-						<div class="col-lg-12" style="margin-top: -10px">
+
+						<div class="col-lg-12" style="margin-top: -10px"
+							data-ng-show="pedidos.buscandoProducto">
+							<h5 style="color: #000">Productos</h5>
+							<a class="btn btn-primary pull-right"
+								data-ng-click="pedidos.buscandoProducto = false">X</a>
+							<table class="table">
+								<tr>
+									<th width="10%">#</th>
+									<th width="50%">Nombre</th>
+									<th width="10%">Valor</th>
+									<th width="5%">Cantidad</th>
+									<th width="10%">Total</th>
+									<th width="5%">---</th>
+
+								</tr>
+								<tr data-ng-repeat="producto in pedidos.productosCollection"
+									data-ng-init="pedidos.total = productos.total + producto.valor">
+									<td>*</td>
+									<td>{{producto.nombre}}</td>
+									<td>{{producto.valor | number}}</td>
+									<td><input type="number" class="form-control"
+										data-ng-model="producto.cantidad" min="0"
+										ng-init="producto.cantidad = 1"></td>
+									<td>{{(producto.valor * producto.cantidad) | number}}</td>
+									<td><button class="btn btn-primary"
+											data-ng-click="pedidos.agregarItem(producto)">
+											<i class="fa fa-plus"></i>
+										</button></td>
+								</tr>
+							</table>
+						</div>
+
+						<div class="col-lg-12" style="margin-top: -10px"
+							data-ng-hide="pedidos.buscandoProducto">
 							<h5 style="color: #000">Productos</h5>
 							<table class="table">
 								<tr>
@@ -167,6 +210,7 @@
 									<th>Nombre</th>
 									<th>Cantidad</th>
 									<th>Valor</th>
+									<th>---</th>
 								</tr>
 								<tr data-ng-repeat="producto in pedidos.pedidoSelected.detalle"
 									data-ng-init="pedidos.total = productos.total + producto.valor">
@@ -174,6 +218,11 @@
 									<td>{{producto.producto.nombre}}</td>
 									<td>{{producto.cantidad | number}}</td>
 									<td>{{producto.valor | number}}</td>
+									<td><button class="btn btn-primary"
+											data-ng-click="pedidos.elimiarItem(producto)"
+											data-ng-show="pedidos.accion == 'Confirmar'">
+											<i class="fa fa-minus"></i>
+										</button></td>
 								</tr>
 								<tr>
 									<td colspan="3"></td>
@@ -184,9 +233,18 @@
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">Cancelar</button>
-							<input type="button" class="btn btn-primary" value="Agregar"
+							<input type="button" class="btn btn-primary"
+								value="Cancelar pedido"
+								data-ng-show="pedidos.accion == 'Confirmar'"
+								data-ng-click="pedidos.cancelarPedido()"> <input
+								type="button" class="btn btn-primary" value="{{pedidos.accion}}"
+								data-ng-show="pedidos.accion == 'Confirmar'"
 								data-ng-disabled="pedidos.pedidoSelected.repartidor == null || pedidos.pedidoSelected.repartidor == undefined"
 								data-ng-click="pedidos.confirmar()" disabled="disabled">
+							<input type="button" class="btn btn-primary"
+								value="{{pedidos.accion}}"
+								data-ng-show="pedidos.accion == 'Enviar'"
+								data-ng-click="pedidos.enviar()">
 						</div>
 					</div>
 				</div>
@@ -243,8 +301,8 @@
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
 				<input type="button" class="btn btn-primary" value="No"
-					data-ng-click="pedidos.entregado(5)">
-				<input type="button" class="btn btn-primary" value="Si"
+					data-ng-click="pedidos.entregado(5)"> <input type="button"
+					class="btn btn-primary" value="Si"
 					data-ng-click="pedidos.entregado(4)">
 			</div>
 		</div>
@@ -253,6 +311,6 @@
 
 
 <audio id="audio">
-  <source src="resources/assets/ring.ogg" type="audio/ogg">
-Your browser does not support the audio element.
+	<source src="resources/assets/ring.ogg" type="audio/ogg">
+	Your browser does not support the audio element.
 </audio>

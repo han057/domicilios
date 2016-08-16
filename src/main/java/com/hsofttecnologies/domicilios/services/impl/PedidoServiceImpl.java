@@ -87,7 +87,6 @@ public class PedidoServiceImpl implements PedidoService {
 		Pedido p = buscarPorId(pedido);
 		p.setEstado(3);
 		pedidoDao.actualizarPedido(p);
-
 	}
 
 	@Override
@@ -98,6 +97,26 @@ public class PedidoServiceImpl implements PedidoService {
 		Pedido p = buscarPorId(pedido);
 		p.setEstado(estado);
 		pedidoDao.actualizarPedido(p);
+	}
+
+	@Override
+	public void cancelarPedido(int pedido) {
+		Pedido p = buscarPorId(pedido);
+		p.setEstado(6);
+		pedidoDao.actualizarPedido(p);
+	}
+
+	@Override
+	public void agregarItemPedido(ItemPedido itemPedido, int id) {
+		Pedido pedido = buscarPorId(id);
+		itemPedido.setPedido(pedido);
+		pedido.getDetalle().add(itemPedido);
+		pedidoDao.actualizarPedido(pedido);
+	}
+
+	@Override
+	public void eliminarItemPedido(int id) {
+		pedidoDao.eliminarItemPedido(id);
 	}
 
 }

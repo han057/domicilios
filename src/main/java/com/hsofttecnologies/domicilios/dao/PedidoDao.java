@@ -54,4 +54,10 @@ public interface PedidoDao {
 	 * @param Pedido - Pedido a actualizar
 	 */
 	public void actualizarPedido(Pedido pedido);
+	
+	/**
+	 * Elimina un item de pedido
+	 * @param id
+	 */
+	public void eliminarItemPedido(int id);
 }

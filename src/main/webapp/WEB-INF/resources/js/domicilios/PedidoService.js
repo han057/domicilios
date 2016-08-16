@@ -25,6 +25,18 @@
     			pedidoEntregado: {
     				method: 'POST',
     				url: 'api/pedido/entrega/:id'
+    			},
+    			cancelarPedido: {
+    				method: 'GET',
+    				url: 'api/pedido/cancelar/:id'
+    			}, 
+    			agregarProducto: {
+    				method: 'POST',
+    				url: 'api/pedido/agregar/:id'
+    			},
+    			eliminarProducto: {
+    				method: 'POST',
+    				url: 'api/pedido/quitaritem/:id'
     			}
 			});
 		return resource;

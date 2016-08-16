@@ -49,7 +49,7 @@ public class ProductoServiceImpl implements ProductoService {
 		if (producto == null) {
 			throw new ObjectNotFoundException("Producto con id: " + id + " No encontrado");
 		}
-		
+
 		producto.setActivo(false);
 		productoDao.actualizarProducto(producto);
 	}
@@ -57,5 +57,17 @@ public class ProductoServiceImpl implements ProductoService {
 	@Override
 	public List<Producto> listarProductosPorCategoria(int categoria) {
 		return productoDao.listarProductosPorCategoria(categoria);
+	}
+
+	@Override
+	public List<Producto> listarProductosPorNombre(String nombre) {
+		return productoDao.listarProductosPorNombre(nombre);
+	}
+
+	@Override
+	public void cambiarEstadoProducto(int id) {
+		Producto producto = buscarPorId(id);
+		producto.setActivo(!producto.isActivo());
+		productoDao.actualizarProducto(producto);
 	}
 }

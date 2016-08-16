@@ -20,6 +20,13 @@ public interface ProductoService {
 	public List<Producto> listarProductosPorCategoria(int categoria);
 
 	/**
+	 * Lista Productos
+	 * 
+	 * @return Lista de Productos
+	 */
+	public List<Producto> listarProductosPorNombre(String nombre);
+
+	/**
 	 * Buscar un producto por su identificador único, si no lo encuentra lanza
 	 * un ObjectNotFoundException
 	 * 
@@ -54,5 +61,13 @@ public interface ProductoService {
 	 *            - Producto a eliminar
 	 */
 	public void eliminarProducto(int id);
+
+	/**
+	 * Cambia el estado del producto a inactivo
+	 * 
+	 * @param producto
+	 *            - Producto a eliminar
+	 */
+	public void cambiarEstadoProducto(int id);
 
 }

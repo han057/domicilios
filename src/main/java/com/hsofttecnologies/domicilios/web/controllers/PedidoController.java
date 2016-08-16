@@ -5,14 +5,11 @@ package com.hsofttecnologies.domicilios.web.controllers;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.hsofttecnologies.domicilios.entities.Greeting;
 import com.hsofttecnologies.domicilios.entities.HelloModel;
+import com.hsofttecnologies.domicilios.entities.ItemPedido;
 import com.hsofttecnologies.domicilios.entities.Pedido;
 import com.hsofttecnologies.domicilios.services.PedidoService;
 import com.hsofttecnologies.domicilios.web.dto.Respuesta;
@@ -85,7 +83,16 @@ public class PedidoController {
 		respuesta.setBody(pedido);
 		return respuesta;
 	}
-	
+
+	@RequestMapping(value = url + "/cancelar/{id}", method = RequestMethod.GET)
+	public Respuesta cancelarPedido(@PathVariable("id") int pedido) {
+		pedidoService.cancelarPedido(pedido);
+		Respuesta respuesta = new Respuesta();
+		respuesta.setTipo("Confirmacion");
+		respuesta.setMensaje("El pedido ha sido cancelado");
+		return respuesta;
+	}
+
 	@RequestMapping(value = url + "/enviar/{id}", method = RequestMethod.POST)
 	public Respuesta enviarPedido(@PathVariable("id") int pedido) {
 		pedidoService.enviarPedido(pedido);
@@ -95,7 +102,7 @@ public class PedidoController {
 		respuesta.setBody(pedido);
 		return respuesta;
 	}
-	
+
 	@RequestMapping(value = url + "/entrega/{id}", method = RequestMethod.POST)
 	public Respuesta pedidoEntregado(@PathVariable("id") int pedido, @RequestParam("entregado") int entregado) {
 		pedidoService.entregaPedido(pedido, entregado);
@@ -103,6 +110,25 @@ public class PedidoController {
 		respuesta.setTipo("Confirmacion");
 		respuesta.setMensaje("El pedido ha sido actualizado correctamente");
 		respuesta.setBody(pedido);
+		return respuesta;
+	}
+
+	@RequestMapping(value = url + "/agregar/{id}", method = RequestMethod.POST)
+	public Respuesta agregarProducto(@RequestBody ItemPedido itemPedido, @PathVariable("id") int id) {
+		pedidoService.agregarItemPedido(itemPedido, id);
+		Respuesta respuesta = new Respuesta();
+		respuesta.setTipo("Confirmacion");
+		respuesta.setMensaje("El producto se agregó al pedido correctamente");
+		respuesta.setBody(itemPedido);
+		return respuesta;
+	}
+	
+	@RequestMapping(value = url + "/quitaritem/{id}", method = RequestMethod.POST)
+	public Respuesta elimianrProducto(@PathVariable("id") int id) {
+		pedidoService.eliminarItemPedido(id);
+		Respuesta respuesta = new Respuesta();
+		respuesta.setTipo("Confirmacion");
+		respuesta.setMensaje("El producto se eliminó del pedido correctamente");
 		return respuesta;
 	}
 

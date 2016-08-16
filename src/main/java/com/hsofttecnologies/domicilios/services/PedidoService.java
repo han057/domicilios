@@ -2,6 +2,7 @@ package com.hsofttecnologies.domicilios.services;
 
 import java.util.List;
 
+import com.hsofttecnologies.domicilios.entities.ItemPedido;
 import com.hsofttecnologies.domicilios.entities.Pedido;
 
 public interface PedidoService {
@@ -74,6 +75,26 @@ public interface PedidoService {
 	 * @param estado - codigo de estado (4 o 5) 
 	 */
 	public void entregaPedido(int pedido, int estado);
+	
+	/**
+	 * Método para cancelar pedido (6)
+	 * @param pedido
+	 */
+	public void cancelarPedido(int pedido);
+
+	/**
+	 * Agrega un nuevo item al pedido
+	 * @param itemPedido
+	 * @param id
+	 */
+	public void agregarItemPedido(ItemPedido itemPedido, int id);
+	
+	/**
+	 * Elimina el item de pedido
+	 * @param itemPedido
+	 * @param id
+	 */
+	public void eliminarItemPedido(int id);
 	
 
 }

@@ -18,11 +18,12 @@
 					data-ng-disabled="productos.productoSelected == null">
 					<i class="fa fa-pencil"></i> Editar
 				</button>
-				<button class="btn btn-danger btn-md"
+				<button class="btn btn-md"
 					data-toggle="modal"
 					data-target="#confirmModal"
+					data-ng-class="{'btn-primary': !productos.productoSelected.activo, 'btn-danger': productos.productoSelected.activo}"
 					data-ng-disabled="productos.productoSelected == null">
-					<i class="fa fa-trash-o "></i> Eliminar
+					<i class="fa fa-trash-o "></i> {{productos.productoSelected.activo?'Inactivar':'Activar'}}
 				</button>
 			</div>
 			<br> <br>
@@ -40,7 +41,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr data-ng-repeat="producto in productos.productosCollection"
+					<tr data-ng-repeat="producto in productos.productosCollectionPart"
 						data-ng-click="productos.selectProducto(producto)">
 						<td class=""><input type="checkbox"
 							data-ng-model="producto.selected"> {{producto.id}}</td>
@@ -52,6 +53,21 @@
 								activo'}}</span></td>
 					</tr>
 				</tbody>
+				<tfoot>
+					<tr>
+						<td colspan="6">
+							<ul uib-pagination 
+								total-items="productos.productosCollection.length" 
+								max-size="productos.maxSize" 
+								class="pagination-sm" 
+								ng-model="productos.currentPage"
+								ng-change="productos.changePage()"
+								boundary-link-numbers="true" rotate="false"
+								next-text="Siguiente"
+								previous-text="Anterior"></ul>
+						</td>
+					</tr>
+				</tfoot>
 			</table>
 		</div>
 	</div>
@@ -206,7 +222,7 @@
 				<h4 class="modal-title">Confirme la acción</h4>
 			</div>
 			<div class="modal-body">
-				<p>Seguro que desea eliminar este producto?</p>	
+				<p>Seguro que desea {{productos.productoSelected.activo?'inactivar':'activar'}} este producto?</p>	
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">No</button>

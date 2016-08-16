@@ -18,6 +18,13 @@ public interface ProductoDao {
 	 * @return Lista de Productos
 	 */
 	public List<Producto> listarProductosPorCategoria(int categoria);
+	
+	/**
+	 * Lista Productos
+	 * 
+	 * @return Lista de Productos
+	 */
+	public List<Producto> listarProductosPorNombre(String nombre);
 
 
 	/**

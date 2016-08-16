@@ -184,6 +184,7 @@
     <script type="text/javascript" src="resources/js/lib/angular-messages.js"></script>
   	<script type="text/javascript" src="resources/js/lib/router.es5.min.js"></script>
   	<script type="text/javascript" src="resources/js/lib/angular-resource.min.js"></script>
+  	<script type="text/javascript" src="resources/js/lib/ui-bootstrap-tpls-2.0.2.min.js"></script>
   	<script type="text/javascript" src="resources/js/lib/ng-image-input-with-preview.min.js"></script>
   	<script src="resources/js/lib/sockjs-1.1.1.min.js"></script>
 	<script src="resources/js/lib/stomp.min.js"></script>

@@ -4,18 +4,27 @@
 	angular.module('domicilios.admin')
 	.controller('PedidosController', PedidosController);
 
-	function PedidosController(PedidoService, PedidosSocketService, RepartidorService) {
+	function PedidosController(PedidoService, PedidosSocketService, RepartidorService, ProductoService) {
 		var vm = this;
-		
+				
+		vm.buscandoProducto = false;
+		vm.nombreProducto = '';
 		vm.pedidosCollection = [];
 		vm.pedidosConfirmadosCollection = [];
 		vm.pedidosEnviadosCollection = []
+		vm.productosCollection = [];
 		vm.repartidoresCollection = [];
 		
+		
+		vm.agregarItem = agregarItem; 
+		vm.buscarProducto = buscarProducto;
+		vm.cancelarPedido = cancelarPedido;
 		vm.confirmar = confirmar;
 		vm.entregado = entregado;
+		vm.elimiarItem = elimiarItem;
 		vm.enviar = enviar;
 		vm.getTotal = getTotal;
+		vm.selectPedido = selectPedido;
 		
 		
 		PedidoService.query({estado:1}, function(data) {
@@ -36,8 +45,28 @@
 		
 		PedidosSocketService.receive().then(null, null, function(p){
 			document.getElementById("audio").play();
+			for(var i = 0; i < vm.pedidosCollection.lenght; i++) {
+				if (vm.pedidosCollection[i].id == p.id) {
+					return;
+				}
+			}
 			vm.pedidosCollection.push(p);
 		})
+		
+		function agregarItem(p) {
+			PedidoService.agregarProducto({id:vm.pedidoSelected.id}, {producto:p, cantidad: p.cantidad, valor: p.cantidad * p.valor}, function(data){
+				vm.pedidoSelected.detalle.push(data.body);
+			});
+		}
+		
+		function buscarProducto() {
+			vm.buscandoProducto = true;
+			ProductoService
+			.listarProductosPorNombre({nombre: vm.nombreProducto}, $.param({nombre: vm.nombreProducto}), 
+					function(data){
+						vm.productosCollection = data;
+			});
+		}
 		
 		function confirmar() {
 			PedidoService
@@ -50,6 +79,22 @@
 						vm.pedidosConfirmadosCollection.push(p);
 						$('.modal').modal('hide');
 						showGritter('Confirmado', 'El pedido fue confirmado y asignado a ' + vm.pedidoSelected.repartidor.nombre, false);
+			});
+		}
+		
+		function cancelarPedido() {
+			PedidoService
+			.cancelarPedido({id: vm.pedidoSelected.id}, 
+					function(data){
+						vm.pedidosCollection.splice(vm.pedidosCollection.indexOf(vm.pedidoSelected), 1);
+						$('.modal').modal('hide');
+						showGritter('Confirmado', 'El pedido fue cancelado', false);
+			});
+		}
+		
+		function elimiarItem(i) {
+			PedidoService.eliminarProducto({id:i.id}, null, function(data){
+				vm.pedidoSelected.detalle.splice(vm.pedidoSelected.detalle.indexOf(i), 1);
 			});
 		}
 		
@@ -77,6 +122,11 @@
 						$('.modal').modal('hide');
 						showGritter('Modificado', 'El estado de entrega del pedido fue modificado correctamente', false);
 			});
+		}
+		
+		function selectPedido(pedido, accion) {
+			vm.pedidoSelected = pedido;
+			vm.accion = accion;
 		}
 		
 		function showGritter(title, text, sticky) {

@@ -1,10 +1,15 @@
 package com.hsofttecnologies.domicilios.config.init;
 
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 import com.hsofttecnologies.domicilios.config.HibernateConfig;
 import com.hsofttecnologies.domicilios.config.MvcConfig;
 import com.hsofttecnologies.domicilios.config.SecurityConfig;
+import com.hsofttecnologies.domicilios.web.listeners.SessionListener;
 
 public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
@@ -22,7 +27,12 @@ public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServlet
 	protected String[] getServletMappings() {
 		return new String[] { "/" };
 	}
-
+	
+	@Override
+	public void onStartup(ServletContext servletContext) throws ServletException {
+		super.onStartup(servletContext);
+		servletContext.addListener(new SessionListener());
+	}
 }
 
 /*

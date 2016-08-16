@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hsofttecnologies.domicilios.entities.Producto;
@@ -66,6 +67,15 @@ public class ProductoController {
 		respuesta.setBody(producto);
 		return respuesta;
 	}
+	
+	@RequestMapping(value = url + "/estado/{id}", method = RequestMethod.POST)
+	public Respuesta cambiarEstadoProducto(@PathVariable int id) {
+		productoService.cambiarEstadoProducto(id);
+		Respuesta respuesta = new Respuesta();
+		respuesta.setTipo("Confirmacion");
+		respuesta.setMensaje("El producto ha sido modificado correctamente");
+		return respuesta;
+	}
 
 	@RequestMapping(value = url + "/{id}", method = RequestMethod.DELETE)
 	public Respuesta eliminarProducto(@PathVariable("id") int id) {
@@ -74,6 +84,11 @@ public class ProductoController {
 		respuesta.setTipo("Confirmacion");
 		respuesta.setMensaje("El producto ha sido eliminado correctamente");
 		return respuesta;
+	}
+	
+	@RequestMapping(value = url + "/nombre", method = RequestMethod.POST)
+	public List<Producto> ListarProductosPorNombre(@RequestParam("nombre") String nombre) {
+		return productoService.listarProductosPorNombre(nombre);
 	}
 
 }

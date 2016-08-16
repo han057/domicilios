@@ -56,8 +56,20 @@ public class ProductoDaoHibernateImpl extends AbstractDAO<Producto> implements P
 	@Override
 	public List<Producto> listarProductosPorCategoria(int categoria) {
 		logger.debug("Listar productos por categoria: " + categoria);
-		Query query = getSession().createQuery("FROM Producto p WHERE p.categoria.id=:id AND p.activo=true ORDER BY p.id ASC");
+		Query query = getSession()
+				.createQuery("FROM Producto p WHERE p.categoria.id=:id AND p.activo=true ORDER BY p.id ASC");
 		query.setInteger("id", categoria);
+		return query.list();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Producto> listarProductosPorNombre(String nombre) {
+		logger.debug("Listar productos por nombre: " + nombre);
+		Query query = getSession()
+				.createQuery("FROM Producto p WHERE lower(p.nombre) LIKE lower(:nombre) AND p.activo=true ORDER BY p.id ASC");
+		query.setMaxResults(4);
+		query.setString("nombre", "%" + nombre + "%");
 		return query.list();
 	}
 
