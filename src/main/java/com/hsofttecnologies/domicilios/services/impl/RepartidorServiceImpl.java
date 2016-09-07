@@ -33,21 +33,19 @@ public class RepartidorServiceImpl implements RepartidorService {
 	}
 
 	public void agregarRepartidor(Repartidor repartidor) {
-		Repartidor repartidorTem = repartidorDao.buscarPorId(repartidor.getId());
-		if (repartidorTem == null) {
-			repartidorDao.agregarRepartidor(repartidor);
-		} else {
-			throw new ObjectAlreadyExistException("el repartido con nombre " + repartidor.getNombre() + " ya exixte ");
-		}
+		repartidorDao.agregarRepartidor(repartidor);
 	}
 
 	public void actualizarRepartidor(Repartidor repartidor) {
-		Repartidor repartidorTem = repartidorDao.buscarPorId(repartidor.getId());
-		if (repartidorTem != null) {
-			repartidorDao.actualizarRepartidor(repartidor);
-		} else {
-			throw new ObjectAlreadyExistException("el repartido con nombre " + repartidor.getNombre() + " no exixte ");
-		}
+		repartidorDao.actualizarRepartidor(repartidor);
+	}
+
+	@Override
+	public void cambiarEstadoRepartidor(int id) {
+		Repartidor repartidor = buscarPorId(id);
+		repartidor.setEstado(!repartidor.isEstado());
+		repartidorDao.actualizarRepartidor(repartidor);
+		
 	}
 
 }

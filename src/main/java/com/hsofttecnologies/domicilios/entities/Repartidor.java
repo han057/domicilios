@@ -27,11 +27,23 @@ import org.hibernate.annotations.PolymorphismType;
 @Polymorphism(type = PolymorphismType.EXPLICIT)
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Repartidor extends Persona {
+
+	@Column(name = "estado")
+	private boolean estado;
+
 	/**
 	 * Fecha de ingreso del repartidor
 	 */
 	@Column(name = "fechaingreso")
 	private Date fechaIngreso;
+
+	public boolean isEstado() {
+		return estado;
+	}
+
+	public void setEstado(boolean estado) {
+		this.estado = estado;
+	}
 
 	/**
 	 * Retorna la fecha de ingreso del repartidor

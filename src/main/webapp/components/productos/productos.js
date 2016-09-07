@@ -26,13 +26,6 @@
 			vm.categoriasCollection = CategoriaService.query();
 			vm.productosCollectionPart = vm.productosCollection.slice(0, vm.maxSize); 
 		});
-		/*vm.promise = ProductoService.query(function(productos){
-			vm.productosCollection = productos;
-			CategoriaService.query(function(categorias){
-				vm.categoriasCollection = categorias;
-			});
-		}).$promise;*/
-
 		
 		function abrirModal(accion) {
 			if(accion === 'Agregar') {
@@ -45,9 +38,7 @@
 		}
 		
 		function changePage() {
-			console.log("Current page: " + vm.currentPage);
 			var start = vm.currentPage * vm.maxSize - vm.maxSize;
-			console.log("Current page * size - size: " + start);
 			vm.productosCollectionPart = vm.productosCollection.slice(start, (start + vm.maxSize));
 		}
 		

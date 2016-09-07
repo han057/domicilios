@@ -1,7 +1,7 @@
 (function() {
 	'use strict'
 
-	angular.module('domicilios.admin', [ 'domicilios', 'ngNewRouter', 'ngMessages', 'ngImageInputWithPreview', 'ui.bootstrap'])
+	angular.module('domicilios.admin', [ 'domicilios', 'ngNewRouter', 'ngMessages', 'ngImageInputWithPreview', 'ui.bootstrap', 'chart.js'])
 	.controller('AppController', ['$router', AppController]);
 
 	function AppController($router) {
@@ -14,6 +14,12 @@
 		}, {
 			path : '/pedidos',
 			components : 'pedidos'
+		}, {
+			path : '/reportes',
+			components : 'reportes'
+		}, {
+			path : '/repartidores',
+			components : 'repartidor'
 		}, {
 			path : '/reportes',
 			components : 'reportes'

@@ -6,6 +6,7 @@ package com.hsofttecnologies.domicilios.dao.impl;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
@@ -34,7 +35,9 @@ public class PedidoDaoHibernateImpl extends AbstractDAO<Pedido> implements Pedid
 	 */
 	public List<Pedido> listarPedidos() {
 		logger.debug("Listando pedidos...");
-		return list(Pedido.class);
+		Criteria criteria = getSession().createCriteria(Pedido.class);
+		criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+		return criteria.list();
 	}
 
 	/*
@@ -87,11 +90,13 @@ public class PedidoDaoHibernateImpl extends AbstractDAO<Pedido> implements Pedid
 
 	@Override
 	public List<Pedido> listarPedidosEstado(int id) {
-		/*return getSession().createCriteria(Pedido.class)
-				.add(Restrictions.eq("estado", id))
-				.addOrder(Order.asc("fecha")).list();*/
+		/*
+		 * return getSession().createCriteria(Pedido.class)
+		 * .add(Restrictions.eq("estado", id))
+		 * .addOrder(Order.asc("fecha")).list();
+		 */
 		Query query = getSession().createQuery("FROM Pedido p WHERE p.estado=:id");
-		query.setInteger("id",id);
+		query.setInteger("id", id);
 		return query.list();
 	}
 

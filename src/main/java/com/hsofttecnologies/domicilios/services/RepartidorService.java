@@ -36,5 +36,11 @@ public interface RepartidorService {
 	 * @param repartidor - Repartidor a actualizar
 	 */
 	public void actualizarRepartidor(Repartidor repartidor);
+	
+	/**
+	 * Modifica el estado del repartidor
+	 * @param id - identificador del repartidor
+	 */
+	public void cambiarEstadoRepartidor(int id);
 
 }

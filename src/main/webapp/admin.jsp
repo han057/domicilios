@@ -103,6 +103,14 @@
                           <span>Categorias</span>
                       </a>
                   </li> -->
+                  <sec:authorize access="hasRole('ROLE_ADMIN') and isAuthenticated()">
+					  <li class="sub-menu">
+	                      <a href="#/repartidores" >
+	                      	<i class="fa fa-motorcycle"></i>
+                          	<span>Repartidores</span>
+	                      </a>
+	                  </li>
+				  </sec:authorize>
                   <!--<li class="sub-menu">
                       <a href="javascript:;" >
                           <i class="fa fa-motorcycle"></i>
@@ -110,7 +118,7 @@
                       </a>
                   </li>-->
                   <li class="sub-menu">
-                      <a href="javascript:;" >
+                      <a href="#/reportes" >
                           <i class="fa fa-bar-chart" aria-hidden="true"></i>
                           <span>Reportes</span>
                       </a>
@@ -185,6 +193,8 @@
   	<script type="text/javascript" src="resources/js/lib/router.es5.min.js"></script>
   	<script type="text/javascript" src="resources/js/lib/angular-resource.min.js"></script>
   	<script type="text/javascript" src="resources/js/lib/ui-bootstrap-tpls-2.0.2.min.js"></script>
+  	<script type="text/javascript" src="resources/js/lib/chart.js"></script>
+  	<script type="text/javascript" src="resources/js/lib/angular-chart.min.js"></script>
   	<script type="text/javascript" src="resources/js/lib/ng-image-input-with-preview.min.js"></script>
   	<script src="resources/js/lib/sockjs-1.1.1.min.js"></script>
 	<script src="resources/js/lib/stomp.min.js"></script>
@@ -200,5 +210,7 @@
   	<script type="text/javascript" src="components/indexadmin/indexadmin.js"></script>
   	<script type="text/javascript" src="components/pedidos/pedidos.js"></script>
     <script type="text/javascript" src="components/productos/productos.js"></script>
+    <script type="text/javascript" src="components/repartidor/repartidor.js"></script>
+    <script type="text/javascript" src="components/reportes/reportes.js"></script>
   </body>
 </html>

@@ -41,8 +41,7 @@ public class PedidoController {
 	PedidoService pedidoService;
 
 	@RequestMapping(value = url, method = RequestMethod.GET)
-	public List<Pedido> listarPedidos(@RequestParam("estado") Integer estado) {
-		System.out.println(estado);
+	public List<Pedido> listarPedidos(@RequestParam(name = "estado", required = false) Integer estado) {
 		List<Pedido> pedidos = estado == null ? pedidoService.listarPedidos()
 				: pedidoService.listarPedidosEstado(estado);
 		return pedidos;
@@ -122,7 +121,7 @@ public class PedidoController {
 		respuesta.setBody(itemPedido);
 		return respuesta;
 	}
-	
+
 	@RequestMapping(value = url + "/quitaritem/{id}", method = RequestMethod.POST)
 	public Respuesta elimianrProducto(@PathVariable("id") int id) {
 		pedidoService.eliminarItemPedido(id);

@@ -20,7 +20,7 @@ import com.hsofttecnologies.domicilios.entities.Repartidor;
  * @author javier Cabrera
  *
  */
-@Repository("RepartidorDoa")
+@Repository("RepartidorDao")
 public class RepartidorDaoHibernateIpml extends AbstractDAO<Repartidor> implements RepartidorDao {
 	private Logger logger = Logger.getLogger(RepartidorDaoHibernateIpml.class);
 	@Autowired SessionFactory session;
